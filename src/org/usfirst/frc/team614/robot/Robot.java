@@ -111,9 +111,9 @@ public class Robot extends IterativeRobot {
 		victorFeeder.set(0);
 
 		SmartDashboard.putNumber("Shooter CAN Talon Setpoint", SmartDashboard.getNumber("Shooter CAN Talon Setpoint", 0));
-		SmartDashboard.putNumber("Shooter Feeder Speed", SmartDashboard.getNumber("Shooter Feeder Speed", 0));
         SmartDashboard.putNumber("Shooter CAN Talon Speed", 0);
         SmartDashboard.putNumber("Shooter CAN Talon Error", 0);
+		SmartDashboard.putNumber("Shooter Feeder Speed", SmartDashboard.getNumber("Shooter Feeder Speed", 0));
         SmartDashboard.putNumber("Shooter Amperage", 0);
 	}
 
