@@ -40,8 +40,10 @@ public class Robot extends IterativeRobot {
 
 	public CANTalon talonMaster = new CANTalon(1);
 	public CANTalon talonSlave = new CANTalon(3);
-	public VictorSP victorFeeder = new VictorSP(4);
+	public VictorSP victorFeeder = new VictorSP(6);
+	public VictorSP victorFeederSlave = new VictorSP(7);
 	
+	public VictorSP victorJoystick = new VictorSP(4);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -107,8 +109,11 @@ public class Robot extends IterativeRobot {
 		talonSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
 		talonSlave.set(talonMaster.getDeviceID());
 		talonSlave.reverseOutput(true);
-        
+
 		victorFeeder.set(0);
+		victorFeederSlave.set(0);
+		
+		victorJoystick.set(0);
 
 		SmartDashboard.putNumber("Shooter CAN Talon Setpoint", SmartDashboard.getNumber("Shooter CAN Talon Setpoint", 0));
         SmartDashboard.putNumber("Shooter CAN Talon Speed", 0);
@@ -213,11 +218,15 @@ public class Robot extends IterativeRobot {
 //		}
 		if (gamepad.getRawButton(Gamepad.button_B)) {
 			victorFeeder.set(SmartDashboard.getNumber("Shooter Feeder Speed", 0.5));
+			victorFeederSlave.set(SmartDashboard.getNumber("Shooter Feeder Speed", 0.5));
 		}
 		
 		else {
 			victorFeeder.set(0);
+			victorFeederSlave.set(0);
 		}
+		
+		victorJoystick.set(gamepad.getAxis(gamepad.leftStick_Y));
 		
         SmartDashboard.putNumber("Shooter CAN Talon Speed", talonMaster.getSpeed());
         SmartDashboard.putNumber("Shooter CAN Talon Error", talonMaster.getSpeed() - talonMaster.getSetpoint());
